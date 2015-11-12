@@ -2,17 +2,18 @@ import numpy as np
 import cv2
 from matplotlib import pyplot as plt
 
-img = cv2.imread('C:/Users/Ariadna/Documents/audiovisuals 4t/GDSA/102.3/Castell_Cartoixa/castell_cartoixa_11.jpg',0)
+img = cv2.imread('C:/Users/Gerard/Pictures/a.jpg',0)
+# el 0 ho passa a nivells de gris
 
-# Initiate STAR detector
+# Iniciem el detector ORB
 orb = cv2.ORB()
 
-# find the keypoints with ORB
+# Detecta els punts clau a la imatge
 kp = orb.detect(img,None)
 
 # compute the descriptors with ORB
-kp, des = orb.compute(img, kp)
+#kp, des = orb.compute(img, kp)
 
-# draw only keypoints location,not size and orientation
-img2 = cv2.drawKeypoints(img,kp,color=(0,255,0), flags=0)
+img2 = cv2.drawKeypoints(img,kp,flags=4)
 plt.imshow(img2),plt.show()
+
