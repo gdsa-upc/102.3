@@ -1,4 +1,6 @@
 import os 
+
+
 def creacion_bd(tipo,indir,outdir):
     images = os.listdir(indir) 
     outfile = open(outdir+'/DB_Annotation.txt','w')  
