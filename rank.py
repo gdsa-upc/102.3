@@ -6,7 +6,7 @@ def rank(features_dir,train_features,outdir):
     ftres_in = open(features_dir,'rb')#abrimos el fichero pickle val o set
     rango = pickle.load(ftres_in)
     for i in rango.keys():#The method keys() returns a list of all the available keys in the dictionary.
-        output = open(outdir+'/'+tipo+'_rank/'+i+'.txt','w')#ficheros de salida 
+        output = open(outdir+'/'+i+'.txt','w')#ficheros de salida 
         for j in train.keys():
             output.write(random.choice(train.keys())+'\n')#The method choice() returns a random item from a list, tuple, or string.
         output.close()
