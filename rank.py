@@ -1,17 +1,30 @@
 # -*- coding: utf-8 -*-
-import random
+from parametres import parametres
+import collections
 import pickle
-def rank(query_features,train_features,outdir):
+from scipy.spatial import distance
+
+
+def rank(query_features,train_features):
+    
+    params=parametres()#parametres
+    
     ft_in = open(train_features,'rb')#abrimos el fichero pickle de entrenamiento
     train =pickle.load(ft_in)
     fq_in = open(query_features,'rb')#abrimos el fichero pickle del query
     rango = pickle.load(fq_in)
+    
+    ranking={}
+    
     for i in rango.keys():#The method keys() retorna una llista de totes les claus disponibles al diccionari
-        if i!='Thumb':
-            output = open(outdir+'/'+i+'.txt','w')#ficheros de salida 
-            for j in train.keys():
-                f=random.choice(train.keys())
-                output.write(f+'\n')#The method choice() retorna un element aleatòri d'una llista
-            output.close()
+        output = open(params('arrel_sortida')+'/'+i+'.txt','w')#ficheros de salida 
+        for j in train.keys():
+            ###
+            dist=distance.euclidean(i, j)
+            ranking[dist]=i
+            ###
+        rank_ord = collections.OrderedDict(sorted(ranking.items()))
+        output.write(rank_ord.values()+'\n')
+        output.close()
     ft_in.close()
     fq_in.close()
