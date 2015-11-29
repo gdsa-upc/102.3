@@ -8,7 +8,7 @@ from Parametres import parametres
 from build_database import build_database
 import numpy as np
 
-def Feature_extraction(parametres):
+def Feature_extraction():
     ####Extract Local Features
     build_database(path imatges train, path RdE)
     images=open('ID.txt', "r") #obre l'arxiu on hi ha les id's en mode lectura
@@ -37,6 +37,7 @@ def Feature_extraction(parametres):
         
     ###Construccion diccionari val
     build_database(path imatges val, path RdE)
+    #compute assignaments
     images=open('ID.txt', "r") #obre l'arxiu on hi ha les id's en mode lectura
     dic_val={}
     for img in images:
