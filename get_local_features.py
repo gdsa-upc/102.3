@@ -8,7 +8,7 @@ def get_local_features(ruta):
     rimg = cv2.resize(img, dim, interpolation = cv2.INTER_AREA)
     plt.imshow(img),plt.show()
     plt.imshow(rimg),plt.show()
-    sift = cv2.SIFT() # calcula la lista de descriptores de la imagen
+    sift = cv2.SIFT(20) # calcula la lista de descriptores de la imagen
     keypoints, descriptores = sift.detectAndCompute(rimg,None)
     return keypoints,descriptores
 
