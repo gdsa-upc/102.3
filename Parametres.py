@@ -44,6 +44,5 @@ def crea_dirs(params):
     crea_nou_dir(os.path.join(dir_out,'rankings'))
     crea_nou_dir(os.path.join(dir_out,'classificacions'))
 
-if __name__ == "__main__":
 
 #print parametres()
