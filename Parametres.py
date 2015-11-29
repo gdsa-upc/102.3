@@ -18,7 +18,7 @@ def parametres():
 
 #params
     params['mida_descriptor']=10
-    identificacions=p.read_csv('C:/Users/Gerard/Documents/Uni/GDSA_projecte/carpeta_in/Terrassabuldings900/train/annotation.txt', sep='\t', header = 0)
+    identificacions=p.read_csv('C:/Users/Gerard/Documents/Uni/GDSA_projecte/carpeta_in/Terrassabuildings900/train/annotation.txt', sep='\t', header = 0)
 #Copieu el path sencer igual que he fet jo perquè la funció read_csv posa les / al revés i no reconeix el path
 
 #identificacions conté tot el fitxer annotation.txt (classificat en id's i noms d'edificis)
