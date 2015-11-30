@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from parametres import parametres
+from Parametres import parametres
 import collections
 import pickle
 from scipy.spatial import distance
