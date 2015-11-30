@@ -8,6 +8,6 @@ def build_bow(code,k):
         c=code.count(a)
         bow.append(c)
         L2=L2+(c*c)
-    s=math.sqrt(s)
+    s=math.sqrt(L2)
     c=c/s
     return c
