@@ -1,15 +1,30 @@
-import random
+# -*- coding: utf-8 -*-
+from Parametres import parametres
+import collections
 import pickle
-def rank(features_dir,train_features,outdir):
-    train_in = open(train_features,'rb')#abrimos el fichero pickle de entrenamiento
-    train =pickle.load(train_in)
-    ftres_in = open(features_dir,'rb')#abrimos el fichero pickle val o set
-    rango = pickle.load(ftres_in)
-    for i in rango.keys():#The method keys() returns a list of all the available keys in the dictionary.
-        output = open(outdir+'/'+i+'.txt','w')#ficheros de salida 
+from scipy.spatial import distance
+
+
+def rank(query_features,train_features):
+    
+    params=parametres()#parametres
+    
+    ft_in = open(train_features,'rb')#abrimos el fichero pickle de entrenamiento
+    train =pickle.load(ft_in)
+    fq_in = open(query_features,'rb')#abrimos el fichero pickle del query
+    rango = pickle.load(fq_in)
+    
+    ranking={}
+    
+    for i in rango.keys():#The method keys() retorna una llista de totes les claus disponibles al diccionari
+        output = open(params('arrel_sortida')+'/'+i+'.txt','w')#ficheros de salida 
         for j in train.keys():
-            output.write(random.choice(train.keys())+'\n')#The method choice() returns a random item from a list, tuple, or string.
+            ###
+            dist=distance.euclidean(i, j)
+            ranking[dist]=i
+            ###
+        rank_ord = collections.OrderedDict(sorted(ranking.items()))
+        output.write(rank_ord.values()+'\n')
         output.close()
-    train_in.close()
-    ftres_in.close()
-        
+    ft_in.close()
+    fq_in.close()
