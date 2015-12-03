@@ -1,5 +1,6 @@
-#anul·lem la carpeta de les imatges per qui la tingui en el mateix directori
-/TerrassaBuildings900
+#anul·lem les carpetes que hagi pogut crear algu per llegir dades o extreure resultats
+/*
 #anul·lem els fitxers txt i pickle que creem duran el procediment
+/Parametres.py
 .txt
 .pickle
