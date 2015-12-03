@@ -1,0 +1,5 @@
+#anul·lem la carpeta de les imatges per qui la tingui en el mateix directori
+/TerrassaBuildings900
+#anul·lem els fitxers txt i pickle que creem duran el procediment
+.txt
+.pickle
