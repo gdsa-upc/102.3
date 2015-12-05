@@ -12,44 +12,41 @@ import os
 def Feature_extraction():
     ####Extract Local Features
     params=parametres()
-    #build_database('/'.join([params['arrel_entrada'],params['bd_imatges'],'train','images']), '/'.join([params['arrel_sortida'],'llista_imgs']))
-    #images=open('/'.join([params['arrel_sortida'],'llista_imgs','ID.txt']), "r") #obre l'arxiu on hi ha les id's en mode lectura
-    images = os.listdir('/'.join([params['arrel_sortida'],'llista_imgs','ID.txt']))
+    images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'train','images'])) #llegeix els fitxers de la carpeta d'entrenament
     descriptors=[]
-    #per cada vegada que pugui llegir una línia (un id) del fitxer executa el loop sencer
     for img in images:
         k, des=get_local_features_orb(img)
-        descriptors.append(des) 
-    #images.close()
-    #print descriptors; es para en aquest punt i no agafa bé els valors assignant None, None, ...
+        if des is not None:
+            if len(descriptors)==0:
+                descriptors=des
+            else:
+                descriptors=np.vstack((descriptors,des))
     
     ####Train CodeBook
     clusters=4
-    code_book, dist, centres=train_codebook(descriptors,clusters)
-    
+    code_book=train_codebook(descriptors,clusters)
     ####Compute Assignaments
-    images=open('ID.txt', "r") #obre l'arxiu on hi ha les id's en mode lectura
+    images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'train','images'])) #llegeix els fitxers de la carpeta d'entrenament
     dic_train={}
     for img in images:
         kp_img, desc_img=get_local_features_orb(img)
-        cluster_pertanyent, dist_centrecluster_proper=get_assignments(desc_img,code_book)
+        cl_img=get_assignments(desc_img,code_book)
     
         ####Construct BoW vector
-        bow=build_bow(cluster_pertanyent, clusters)
+        bow=build_bow(cl_img, clusters)
+        img=img[0:-4]
         dic_train[img]=bow
         
     ###Construccion diccionari val    
-    build_database('/'.join([params['arrel_entrada'],params['bd_imatges'],'val','images']), '/'.join([params['arrel_sortida'],'llista_imgs']))
-    images=open('/'.join([params['arrel_sortida'],'llista_imgs','ID.txt']), "r") #obre l'arxiu on hi ha les id's en mode lectura
-    
-    
+    images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'val','images'])) #llegeix els fitxers de la carpeta de validació
     dic_val={}
     for img in images:
         kp_img, desc_img=get_local_features_orb(img)
-        cluster_pertanyent, dist_centrecluster_proper=get_assignments(desc_img,code_book)
+        cl_img=get_assignments(desc_img,code_book)
     
         ####Construct BoW vector
-        bow=build_bow(cluster_pertanyent, clusters)
+        bow=build_bow(cl_img, clusters)
+        img=img[0:-4]
         dic_val[img]=bow
     
     return dic_train,dic_val
