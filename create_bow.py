@@ -1,13 +1,7 @@
-import math
-import numpy
-def build_bow(code,k):
-    a=0
-    L2=0
-    bow=[]
-    for a in a<k:
-        c=code.count(a)
-        bow.append(c)
-        L2=L2+(c*c)
-    s=math.sqrt(L2)
-    c=c/s
-    return c
+import numpy as np
+from sklearn import preprocessing
+def build_bow(code):
+    v=np.bincount(code)
+    print v
+    vn=preprocessing.normalize(v)
+    return vn
