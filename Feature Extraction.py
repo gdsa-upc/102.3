@@ -50,7 +50,5 @@ def Feature_extraction():
             bow=build_bow(cl_img, clusters)
             img=img[0:-4]
             dic_val[img]=bow
-    print len(dic_val)
-    print len(dic_train)
     return dic_train,dic_val
     
