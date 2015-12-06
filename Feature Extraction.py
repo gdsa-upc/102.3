@@ -30,24 +30,25 @@ def Feature_extraction():
     dic_train={}
     for img in images:
         kp_img, desc_img=get_local_features_orb(img)
-        cl_img=get_assignments(desc_img,code_book)
+        if desc_img is not None:
+            cl_img=get_assignments(desc_img,code_book)
     
-        ####Construct BoW vector
-        bow=build_bow(cl_img, clusters)
-        img=img[0:-4]
-        dic_train[img]=bow
+            ####Construct BoW vector
+            bow=build_bow(cl_img, clusters)
+            img=img[0:-4]
+            dic_train[img]=bow
         
     ###Construccion diccionari val    
     images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'val','images'])) #llegeix els fitxers de la carpeta de validació
     dic_val={}
     for img in images:
         kp_img, desc_img=get_local_features_orb(img)
-        cl_img=get_assignments(desc_img,code_book)
+        if desc_img is not None:
+            cl_img=get_assignments(desc_img,code_book)
     
-        ####Construct BoW vector
-        bow=build_bow(cl_img, clusters)
-        img=img[0:-4]
-        dic_val[img]=bow
-    
+            ####Construct BoW vector
+            bow=build_bow(cl_img, clusters)
+            img=img[0:-4]
+            dic_val[img]=bow
     return dic_train,dic_val
     
