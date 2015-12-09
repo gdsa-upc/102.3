@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 from codebook import train_codebook
+import pickle
 from Parametres import parametres
 from assignment import get_assignments
 from get_local_features_orb import get_local_features_orb
 from create_bow import build_bow
 #from get_local_features_sift import get_local_features_sift
-from build_database import build_database
 import numpy as np
 import os 
 
@@ -50,5 +50,8 @@ def Feature_extraction():
             bow=build_bow(cl_img, clusters)
             img=img[0:-4]
             dic_val[img]=bow
-    return dic_train,dic_val
-    
+            save_train=open(params('arrel_sortida')+'/dictrain.pickle', "wb" ) 
+            save_val=open(params('arrel_sortida')+'/dicval.pickle', "wb" ) 
+            pickle.dump( dic_train,save_train)
+            pickle.dump( dic_val,save_val)
+    return
