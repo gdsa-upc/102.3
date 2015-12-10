@@ -15,8 +15,8 @@ def Feature_extraction():
     images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'train','images'])) #llegeix els fitxers de la carpeta d'entrenament
     descriptors=[]
     for img in images:
-        k, des=get_local_features_orb(img)
-        if des is not None:
+        if img!='Thumbs.db':
+            k, des=get_local_features_orb(img)
             if len(descriptors)==0:
                 descriptors=des
             else:
@@ -29,8 +29,8 @@ def Feature_extraction():
     images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'train','images'])) #llegeix els fitxers de la carpeta d'entrenament
     dic_train={}
     for img in images:
-        kp_img, desc_img=get_local_features_orb(img)
-        if desc_img is not None:
+        if img!='Thumbs.db':
+            kp_img, desc_img=get_local_features_orb(img)
             cl_img=get_assignments(desc_img,code_book)
     
             ####Construct BoW vector
@@ -42,16 +42,16 @@ def Feature_extraction():
     images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'val','images'])) #llegeix els fitxers de la carpeta de validació
     dic_val={}
     for img in images:
-        kp_img, desc_img=get_local_features_orb(img)
-        if desc_img is not None:
+        if img!='Thumbs.db':
+            kp_img, desc_img=get_local_features_orb(img)
             cl_img=get_assignments(desc_img,code_book)
     
             ####Construct BoW vector
             bow=build_bow(cl_img, clusters)
             img=img[0:-4]
             dic_val[img]=bow
-            save_train=open(params('arrel_sortida')+'/dictrain.pickle', "wb" ) 
-            save_val=open(params('arrel_sortida')+'/dicval.pickle', "wb" ) 
-            pickle.dump( dic_train,save_train)
-            pickle.dump( dic_val,save_val)
+    save_train=open(params('arrel_sortida')+'/dictrain.pickle', "wb" ) 
+    save_val=open(params('arrel_sortida')+'/dicval.pickle', "wb" ) 
+    pickle.dump( dic_train,save_train)
+    pickle.dump( dic_val,save_val)
     return
