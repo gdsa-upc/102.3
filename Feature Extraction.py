@@ -50,8 +50,8 @@ def Feature_extraction():
             bow=build_bow(cl_img, clusters)
             img=img[0:-4]
             dic_val[img]=bow
-    save_train=open(params('arrel_sortida')+'/dictrain.pickle', "wb" ) 
-    save_val=open(params('arrel_sortida')+'/dicval.pickle', "wb" ) 
-    pickle.dump( dic_train,save_train)
-    pickle.dump( dic_val,save_val)
+    with open(params['arrel_sortida']+'/dictrain.pickle', 'wb') as save_train:
+        pickle.dump(dic_train,save_train)
+    with open(params['arrel_sortida']+'/dicval.pickle', 'wb') as save_val:
+        pickle.dump(dic_val,save_val)
     return
