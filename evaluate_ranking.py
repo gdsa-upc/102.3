@@ -1,22 +1,24 @@
 # -*- coding: utf-8 -*-
 import os 
+from Parametres import parametres
 
-def evaluate_ranking(indir,gtt, gtv):
-    f=open(gtt,'r') #obrim el fitxer ground truth del train i llegim l'interior
+def evaluate_ranking():
+    params=parametres()
+    f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/train/annotation.txt'),'r') #obrim el fitxer ground truth del train i llegim l'interior
     next(f)
     dic_gtt={} #crea un diccionari amb la ground truth de train
     for line in f:
         a=line.index('\t')
         dic_gtt[line[0:a]]=line[a+1:]
     f.close()        
-    f=open(gtv,'r') #fem el mateix amb els del test o validació
+    f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/val/annotation.txt'),'r') #fem el mateix amb els del test o validació
     next(f)
     dic_gtv={} #crea un diccionari amb la ground truth de validació o test
     for line in f:
         a=line.index('\t')
         dic_gtv[line[0:a]]=line[a+1:]
     f.close() 
-    ranks = os.listdir(indir)  #llegeixo tots els noms dels fitxers del directori d'entrada i els guarda a ranks
+    ranks = os.listdir(params['arrel_sortida']+'/rankings/')  #llegeixo tots els noms dels fitxers del directori d'entrada i els guarda a ranks
     sumap=0 #suma dels average precisions
     contr=0
     lista=[]
@@ -26,7 +28,7 @@ def evaluate_ranking(indir,gtt, gtv):
         if dic_gtv[R]!='desconegut':
             contr=contr+1#contador de ranks
             c=dic_gtv[R]
-            f=open(indir+'/'+r)
+            f=open(params['arrel_sortida']+'/rankings/'+r)
             lines=f.read().split()
             f.close()
             cont=0 #comptador de resultats
