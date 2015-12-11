@@ -1,7 +1,8 @@
 from sklearn import preprocessing
 import numpy as np
+import math
 def build_bow(code,nc):
-    bow=np.zeros((1,nc))
+    bow=np.zeros(nc)
     for x in range(0,len(bow)):
         for i in code:
             if i==x:
