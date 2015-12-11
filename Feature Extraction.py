@@ -8,7 +8,8 @@ from create_bow import build_bow
 #from get_local_features_sift import get_local_features_sift
 import numpy as np
 import os 
-
+import warnings
+warnings.filterwarnings("ignore")
 def Feature_extraction():
     ####Extract Local Features
     params=parametres()
