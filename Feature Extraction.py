@@ -24,7 +24,7 @@ def Feature_extraction():
                 descriptors=np.vstack((descriptors,des))
     
     ####Train CodeBook
-    clusters=4
+    clusters=1000
     code_book=train_codebook(descriptors,clusters)
     ####Compute Assignaments
     images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'train','images'])) #llegeix els fitxers de la carpeta d'entrenament
