@@ -1,6 +1,7 @@
-from numpy import array
-from scipy.cluster.vq import vq
-from scipy.cluster.vq import whiten
 def get_assignments(desc, codebook):
     code=codebook.predict(desc)
+<<<<<<< HEAD
     return code 
+=======
+    return code
+>>>>>>> refs/remotes/origin/master
