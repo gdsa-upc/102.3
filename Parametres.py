@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-import numpy as np
+import numpy as n
 import pandas as p
 
 def parametres():
@@ -9,20 +9,20 @@ def parametres():
     params = { }
 
 #inputs
-    params['arrel_entrada']='E:/universidad/GDSA/proyecto'
-    params['bd_imatges']='Terrassabuildings900/Terrassabuildings900'
+    params['arrel_entrada']='C:/Users/Ariadna/Documents/GitHub/carpeta_in'
+    params['bd_imatges']='Terrassabuildings900'
 
 #output
-    params['arrel_sortida']='E:/universidad/GDSA/proyecto/carpeta de pruebas'
+    params['arrel_sortida']='C:/Users/Ariadna/Documents/GitHub/carpeta_out'
     crea_dirs(params)
 
 #params
     params['mida_descriptor']=10
-    identificacions=p.read_csv('E:/universidad/GDSA/proyecto/TerrassaBuildings900/TerrassaBuildings900/train/annotation.txt', sep='\t', header = 0)
+    identificacions=p.read_csv('C:/Users/Ariadna/Documents/GitHub/carpeta_in/Terrassabuildings900/train/annotation.txt', sep='\t', header = 0)
 #Copieu el path sencer igual que he fet jo perquè la funció read_csv posa les / al revés i no reconeix el path
 
 #identificacions conté tot el fitxer annotation.txt (classificat en id's i noms d'edificis)
-    params['Possibles_edificis']=np.unique(identificacions['ClassID'])
+    params['Possibles_edificis']=n.unique(identificacions['ClassID'])
 #possibles_edificis conté els noms de les 13 possibles categories (12 edificis i desconegut)
 
     
