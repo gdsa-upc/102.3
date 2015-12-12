@@ -1,3 +1,3 @@
 # RdE
 
-  ##Reconeixedor d'Edificis
+Reconeixedor d'Edificis
