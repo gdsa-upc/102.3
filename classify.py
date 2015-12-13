@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 import pickle 
 from Parametres import parametres
+import warnings
+warnings.filterwarnings("ignore")
 def classify():
     params = parametres()
     bow_val = pickle.load( open('/'.join([params['arrel_sortida']+'/dicval.pickle']), "r" ))#cargamos features a bow_val
