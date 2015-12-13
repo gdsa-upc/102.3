@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 import matplotlib.pyplot as plt
-from sklearn import svm
+from sklearn import svm, grid_search
 import pickle
 from Parametres import parametres
 
@@ -35,18 +35,23 @@ def train_classifier():
     #valors= edifici1,edifici2,...,edifici450
     #i queden lligats per l'ordre
     
-    classweight = {'ajuntament':(1), 'castell_cartoixa':(1), 'catedral':(1), 'desconegut':(1/6),
- 'dona_treballadora':(1), 'escola_enginyeria':(1), 'estacio_nord':(1),
- 'farmacia_albinyana':(1), 'masia_freixa':(1), 'mercat_independencia':(1), 'mnactec':(1),
- 'societat_general':(1), 'teatre_principal':(1)}
+    classweight= {}
+    total_n_samples= len(valors)
+    n_classes= len(set(valors))
 
+    for clase in set(valors):
+        classweight[clase]= float(total_n_samples)/ float(( (n_classes)*  valors.count(clase)  ))
+    
+    parameters= {'kernel':('linear', 'rbf'), 'C':[1, 2, 3, 4, 5, 10], 'gamma': [1e-2, 1e-4]}
     
     model = svm.SVC(C=1.0, cache_size=200, class_weight=classweight, coef0=0.0, 
     decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
     max_iter=-1, probability=False, random_state=None, shrinking=True,
     tol=0.001, verbose=False)  
     
-    model.fit(mydict.values(),valors)
+    zones= grid_search.GridSearchCV(model, parameters)
+    
+    zones.fit(mydict.values(),valors)
         
     #SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
     #decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
@@ -55,6 +60,5 @@ def train_classifier():
     
 
     with open(params['arrel_sortida']+'/model_classifier.pickle', 'wb') as save_model:
-        pickle.dump(model,save_model)
+        pickle.dump(zones,save_model)
     
-    return
