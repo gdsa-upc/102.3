@@ -15,17 +15,17 @@ def evaluate_classification(Aut_anot, grown_truth):
     params = parametres()
     f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/val/annotation.txt'),'r') #obrim el fitxer ground truth de validació i llegim l'interior
     next(f)
-    dic_gtv={} #crea un diccionari amb la ground truth de validacio
+    dic_gt={} #crea un diccionari amb la ground truth de validacio
     for line in f:
         a=line.index('\t')
-        dic_gtv[line[0:a]]=line[a+1:]
+        dic_gt[line[0:a]]=line[a+1:]
     f.close()        
     f=open((params['arrel_sortida']+'/classification.txt'),'r') #fem el mateix amb el resultat de classify
     next(f)
-    dic_c={} #crea un diccionari amb el resultat
+    dic_aa={} #crea un diccionari amb el resultat
     for line in f:
         a=line.index('\t')
-        dic_c[line[0:a]]=line[a+1:]
+        dic_aa[line[0:a]]=line[a+1:]
     f.close() 
     
     #Acuracy
