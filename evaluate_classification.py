@@ -5,33 +5,28 @@ from sklearn.metrics import classification_report
 from itertools import islice
 import numpy as np
 from collections import defaultdict
+from Parametres import parametres
 
 
 
 #el codi no funciona i no llegeix bé dels fitxers txt d'entrada
 
 def evaluate_classification(Aut_anot, grown_truth):
-    f=open(Aut_anot, "r")
-    lines=islice(f,1,None)
-    
-    #####línies 12-29: llegeix línia a línia i buscant el tabulafor agafa l'argument de cada ID (que és el que necessita)
-    dic_gt=[] #crea una llista buida
-    for line in lines:
-        inici=line.index("\t")
-        fi=len(line)
-        dic_gt.append(line[inici:fi])
-    f.close()
-
-    f=open(Aut_anot, "r")
-    lines=islice(f,1,None)
-       
-    dic_aa={} #crea una llista buida
-    for line in lines:
-        inici=line.index('\t')
-        fi=len(line)
-        dic_aa.append(line[inici:fi])  
-    f.close()  
-    #####
+    params = parametres()
+    f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/val/annotation.txt'),'r') #obrim el fitxer ground truth de validació i llegim l'interior
+    next(f)
+    dic_gtv={} #crea un diccionari amb la ground truth de validacio
+    for line in f:
+        a=line.index('\t')
+        dic_gtv[line[0:a]]=line[a+1:]
+    f.close()        
+    f=open((params['arrel_sortida']+'/classification.txt'),'r') #fem el mateix amb el resultat de classify
+    next(f)
+    dic_c={} #crea un diccionari amb el resultat
+    for line in f:
+        a=line.index('\t')
+        dic_c[line[0:a]]=line[a+1:]
+    f.close() 
     
     #Acuracy
     Accuracy=accuracy_score(dic_gt, dic_aa)
