@@ -1,15 +1,12 @@
-import pickle
-import random
-import numpy as np
-labels = ['catedral','mercat_independencia','mnactec','masia_freixa','castell_cartoixa','societat_general','estacio_nord','dona_treballadora','escola_enginyeria','farmacia_albinyana','teatre_principal','ajuntament','desconegut']
-def classify (dicc, outdir):
-    outfile = open(outdir+'/CL.txt','r+')
-    val_id = open(dicc, 'rb')
-    mydict = pickle.load(val_id)
-    ides=mydict.keys()
-
-    for ids in ides:
-        lab=labels[np.random.random_integers(0,12)]
-        outfile.write(ids + ' ' + lab+ '\n')
-    val_id.close()
+# -*- coding: utf-8 -*-
+import pickle 
+from Parametres import parametres
+def classify():
+    params = parametres()
+    bow_val = pickle.load( open('/'.join([params['arrel_sortida']+'/dicval.pickle']), "r" ))#cargamos features a bow_val
+    classifier= pickle.load( open(params['arrel_sortida']+'/model_classifier.pickle', 'r') )#cargamos el clasificador entrenado
+    outfile = open(params['arrel_sortida']+'/classification.txt', 'wb')#creamos directorio de salida
+    #print bow_val
+    for im_id, im_bow in bow_val.items():
+        outfile.write(str(im_id) + "\t" + str(classifier.predict(im_bow)[0]) + "\n"  ) # escribimos la id de la imagen con la predicción del clasificador
     outfile.close()
