@@ -35,10 +35,10 @@ def train_classifier():
     #valors= edifici1,edifici2,...,edifici450
     #i queden lligats per l'ordre
     
-    classweight = {'ajuntament':(1/13), 'castell_cartoixa':(1/13), 'catedral':(1/13), 'desconegut':(1/13),
- 'dona_treballadora':(1/13), 'escola_enginyeria':(1/13), 'estacio_nord':(1/13),
- 'farmacia_albinyana':(1/13), 'masia_freixa':(1/13), 'mercat_independencia':(1/13), 'mnactec':(1/13),
- 'societat_general':(1/13), 'teatre_principal':(1/13)}
+    classweight = {'ajuntament':(1), 'castell_cartoixa':(1), 'catedral':(1), 'desconegut':(1/6),
+ 'dona_treballadora':(1), 'escola_enginyeria':(1), 'estacio_nord':(1),
+ 'farmacia_albinyana':(1), 'masia_freixa':(1), 'mercat_independencia':(1), 'mnactec':(1),
+ 'societat_general':(1), 'teatre_principal':(1)}
 
     
     model = svm.SVC(C=1.0, cache_size=200, class_weight=classweight, coef0=0.0, 
