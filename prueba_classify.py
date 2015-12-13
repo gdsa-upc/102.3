@@ -3,7 +3,7 @@ import pickle
 from Parametres import parametres
 def classify(features, model):
     params = parametres()
-    bow_val = pickle.load( open('/'.join([params['arrel_entrada'],'102.3','RdE','dic_train']), "r" ))#cargamos features a bow_val
+    bow_val = pickle.load( open('/'.join([params['arrel_entrada'],'102.3','RdE','/Train_diccionari.pickle']), "r" ))#cargamos features a bow_val
     classifier= pickle.load( open(params['arrel_sortida']+'/model_classifier.pickle', 'r') )#cargamos el clasificador entrenado
     outfile = open(params['arrel_sortida']+'/classification.txt', 'wb')#creamos directorio de salida
     print bow_val
