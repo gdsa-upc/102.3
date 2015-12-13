@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import matplotlib.pyplot as plt
 from sklearn import svm
 import pickle
 from Parametres import parametres
@@ -33,8 +34,18 @@ def train_classifier():
     #mydict.values()=[BoW1],[BoW2],...,[BoW450]
     #valors= edifici1,edifici2,...,edifici450
     #i queden lligats per l'ordre
-                      
-    model = svm.SVC()  
+    
+    classweight = {'ajuntament':(1/13), 'castell_cartoixa':(1/13), 'catedral':(1/13), 'desconegut':(1/13),
+ 'dona_treballadora':(1/13), 'escola_enginyeria':(1/13), 'estacio_nord':(1/13),
+ 'farmacia_albinyana':(1/13), 'masia_freixa':(1/13), 'mercat_independencia':(1/13), 'mnactec':(1/13),
+ 'societat_general':(1/13), 'teatre_principal':(1/13)}
+
+    
+    model = svm.SVC(C=1.0, cache_size=200, class_weight=classweight, coef0=0.0, 
+    decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
+    max_iter=-1, probability=False, random_state=None, shrinking=True,
+    tol=0.001, verbose=False)  
+    
     model.fit(mydict.values(),valors)
         
     #SVC(C=1.0, cache_size=200, class_weight=None, coef0=0.0,
@@ -42,7 +53,7 @@ def train_classifier():
     #max_iter=-1, probability=False, random_state=None, shrinking=True,
     #tol=0.001, verbose=False) 
     
-    
+
     with open(params['arrel_sortida']+'/model_classifier.pickle', 'wb') as save_model:
         pickle.dump(model,save_model)
     
