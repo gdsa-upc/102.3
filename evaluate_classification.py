@@ -11,7 +11,7 @@ from Parametres import parametres
 
 #el codi no funciona i no llegeix bé dels fitxers txt d'entrada
 
-def evaluate_classification(Aut_anot, grown_truth):
+def evaluate_classification():
     params = parametres()
     f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/val/annotation.txt'),'r') #obrim el fitxer ground truth de validació i llegim l'interior
     next(f)
