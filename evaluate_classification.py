@@ -52,13 +52,13 @@ def evaluate_classification():
     print'\n'
    
     print "Precision:" 
-    print precision_score(gt,aa,average='macro')
+    print precision_score(gt,aa,average='weighted')
     print '\n'
     print "Recall:"
-    print recall_score(gt,aa,average='macro')
+    print recall_score(gt,aa,average='weighted')
     print '\n'
     print "f1_Score:" 
-    print f1_score(gt,aa,average='macro')
+    print f1_score(gt,aa,average='weighted')
 
     #Confusion matrix
     cm = confusion_matrix(gt,aa)
