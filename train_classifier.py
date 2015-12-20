@@ -44,7 +44,7 @@ def train_classifier():
     
     parameters= {'kernel':('linear', 'rbf'), 'C':[1, 2, 3, 4, 5, 10], 'gamma': [1e-2, 1e-4]}
     
-    model = svm.SVC(C=1.0, cache_size=200, class_weight=classweight, coef0=0.0, 
+    model = svm.SVC(C=412, cache_size=200, class_weight=classweight, coef0=0.0, 
     decision_function_shape=None, degree=3, gamma='auto', kernel='rbf',
     max_iter=-1, probability=False, random_state=None, shrinking=True,
     tol=0.001, verbose=False)  

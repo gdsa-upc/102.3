@@ -40,7 +40,7 @@ def Feature_extraction():
             dic_train[img]=bow
         
     ###Construccion diccionari val    
-    images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'],'val','images'])) #llegeix els fitxers de la carpeta de validació
+    images=os.listdir('/'.join([params['arrel_entrada'],params['bd_imatges'], params['val'],'images'])) #llegeix els fitxers de la carpeta de validació
     dic_val={}
     for img in images:
         if img!='Thumbs.db':

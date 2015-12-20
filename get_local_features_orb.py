@@ -8,10 +8,10 @@ def get_local_features_orb(imatge_entrada):
     img = cv2.imread('/'.join([params['arrel_entrada'],params['bd_imatges'],'train','images',imatge_entrada]),0) # el 0 ho passa a nivells de gris
     #arreglo provisional
     if img is None:
-        img=cv2.imread('/'.join([params['arrel_entrada'],params['bd_imatges'],'val','images',imatge_entrada]),0)
+        img=cv2.imread('/'.join([params['arrel_entrada'],params['bd_imatges'],params['val'],'images',imatge_entrada]),0)
     #fi arreglo provisional
 # nombre màxim de kp a extreure
-    n=20
+    n=1000
 # Iniciem el detector ORB
     orb = cv2.ORB(nfeatures=n)
     
