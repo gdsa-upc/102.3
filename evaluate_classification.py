@@ -35,30 +35,38 @@ def evaluate_classification():
     params = parametres()
     f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/val/annotation.txt'),'r') #obrim el fitxer ground truth de validació i llegim l'interior
     next(f)
-    gt=[] #crea una llista amb la ground truth de validacio
+    gtd={} #crea un diccionari amb la ground truth de validacio
     for line in f:
         a=line.index('\t')
-        gt.append(line[a+1:])
-    f.close()      
-    f=open((params['arrel_sortida']+'/classification.txt'),'r') #fem el mateix amb el resultat de classify
-    aa=[] #crea una llista amb el resultat
-    for line in f:
-        a=line.index('\t')
-        aa.append(line[a+1:])
+        gtd[line[0:a]]=line[a+1:]
     f.close()
+    gtd_o=collections.OrderedDict(sorted(gtd.items()))
+    gt=[]
+    for v in gtd_o.values():
+          gt.append(v)
+    f=open((params['arrel_sortida']+'/classification.txt'),'r') #fem el mateix amb el resultat de classify
+    aad={} #crea un diccionari amb el resultat
+    for line in f:
+        a=line.index('\t')
+        aad[line[0:a]]=line[a+1:]
+    f.close()
+    aad_o=collections.OrderedDict(sorted(aad.items()))
+    aa=[]
+    for v in aad_o.values():
+        aa.append(v)
     #Acuracy
     print "Accuracy of system:" 
     print accuracy_score(gt,aa)
     print'\n'
    
     print "Precision:" 
-    print precision_score(gt,aa,average='macro')
+    print precision_score(gt,aa,average='weighted')
     print '\n'
     print "Recall:"
-    print recall_score(gt,aa,average='macro')
+    print recall_score(gt,aa,average='weighted')
     print '\n'
     print "f1_Score:" 
-    print f1_score(gt,aa,average='macro')
+    print f1_score(gt,aa,average='weighted')
 
     #Confusion matrix
     cm = confusion_matrix(gt,aa)
