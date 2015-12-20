@@ -29,7 +29,6 @@ def train_classifier():
         for k in mydict.keys():
             if i == k:
                 valors.append(gtt_dic[k]) #assignem a mida que trobem coincidencies el nom de l'edifici al final de la llista
-    
     #El resultat ve a ser:
     #mydict.values()=[BoW1],[BoW2],...,[BoW450]
     #valors= edifici1,edifici2,...,edifici450
@@ -41,6 +40,7 @@ def train_classifier():
 
     for clase in set(valors):
         classweight[clase]= float(total_n_samples)/ float(( (n_classes)*  valors.count(clase)  ))
+    classweight['desconegut']=classweight['desconegut']-0.18
     
     parameters= {'kernel':('linear', 'rbf'), 'C':[1, 2, 3, 4, 5, 10], 'gamma': [1e-2, 1e-4]}
     
