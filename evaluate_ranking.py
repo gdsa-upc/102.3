@@ -11,7 +11,7 @@ def evaluate_ranking():
         a=line.index('\t')
         dic_gtt[line[0:a]]=line[a+1:]
     f.close()        
-    f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/val/annotation.txt'),'r') #fem el mateix amb els del test o validació
+    f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/'+params['val']+'/annotation.txt'),'r') #fem el mateix amb els del test o validació
     next(f)
     dic_gtv={} #crea un diccionari amb la ground truth de validació o test
     for line in f:
