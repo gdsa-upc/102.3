@@ -28,21 +28,22 @@
         </ul>
       </header>
       <section>
-        <h3>
-<a id="què-és" class="anchor" href="#qu%C3%A8-%C3%A9s" aria-hidden="true"><span class="octicon octicon-link"></span></a>Què és?</h3>
+        <h2>
+<a id="què-és" class="anchor" href="#qu%C3%A8-%C3%A9s" aria-hidden="true"><span class="octicon octicon-link"></span></a>Què és?</h2>
 
-<p>RdE és un programa basat en la visió per computadora que té com a objectiu reconèixer els edificis de Terrassa havent proporcionat una sola imatge capturada amb el teu mòbil, càmera o dispositiu digital. Un software en producció, que canviarà la forma de veure i relacionar-nos amb aquesta ciutat, estructurat en 4 grans blocs. </p>
+<p>RdE és un programa basat en la visió per computadora que té com a objectiu reconèixer els edificis de Terrassa havent proporcionat una sola imatge capturada amb el teu mòbil, càmera o dispositiu digital. Un software en producció, que canviarà la forma de veure i relacionar-nos amb aquesta ciutat, estructurat en 4 grans blocs</p>
 
-<ol>
-<li><p>Base de Dades.
-Creació d'una base de dades i recopilació mostres representatives dels edificis de la ciutat per poder partir des d'una base real i optimitzar els nostres resultats. </p></li>
-<li><p>Extractor de característiques.
-Extracció de la informació de la imatge a partir de d'un codi Payton d'extracció de característiques que ens trobarà els punts d'interès de la imatge i generarem un vector de característiques.</p></li>
-<li><p>Classificador.
-Classificarem la imatge en funció d'aquest vector de característiques extret anteriorment per veure a quina imatge pertany.</p></li>
-<li><p>Resultat.
-I finalment ja podrem mostrar el resultat a qui així ho desitgi. </p></li>
-</ol>
+<p><strong>1. Base de Dades.</strong>
+Creació d'una base de dades i recopilació mostres representatives dels edificis de la ciutat per poder partir des d'una base real i optimitzar els nostres resultats. </p>
+
+<p><strong>2. Extractor de característiques.</strong>
+Extracció de la informació de la imatge a partir de d'un codi Payton d'extracció de característiques que ens trobarà els punts d'interès de la imatge i generarem un vector de característiques.</p>
+
+<p><strong>3. Aplicació.</strong>
+En funció del resultat que esperem aconseguir haurem d'utilitzar una part de l'aplicació o una altra. En aquest cas en tenim dues: el classificador i el buscador. La primera ens dirà a quin edifici pertany la imatge, i la segona ens treurà el nom de les imatges de la base de dades que més s'assemblin. </p>
+
+<p><strong>4. Resultat.</strong>
+I finalment ja podrem mostrar el resultat a qui així ho desitgi. </p>
 
 <h3>
 <a id="el-nostre-projecte-pas-a-pas" class="anchor" href="#el-nostre-projecte-pas-a-pas" aria-hidden="true"><span class="octicon octicon-link"></span></a>El nostre projecte pas a pas</h3>
@@ -76,14 +77,70 @@ I finalment ja podrem mostrar el resultat a qui així ho desitgi. </p></li>
 </tbody>
 </table>
 
+<h2>
+<a id="entenem-el-projecte" class="anchor" href="#entenem-el-projecte" aria-hidden="true"><span class="octicon octicon-link"></span></a>Entenem el projecte?</h2>
+
+<p>El nostre projecte es basa en la tecnología de l'extracció de característiques. Sigui quina sigui l'aplicació començarem per l'anàlisi d'una, o varies imatges per extreure'n els seus punts d'interé i emmaguetzarem en un descriptor. Aquests descriptor serà el que comparant-los amb les imatges de la base de dades ens donaran els resultats. </p>
+
+<p>La part de l'extracció de característiques queda subdividida en 4 passos, que <a href="https://github.com/gdsa-upc/RdE/blob/master/Notebook%20sessi%C3%B3%205.ipynb">aquí</a> trobareu explicat més detalladament :</p>
+
+<p><strong>Get Local Features - Train Codebook - Assignments - Create a BoW</strong></p>
+
+<p>Després arribem a les dues aplicacions del nostre projecte. </p>
+
+<h2>
+<a id="cercador" class="anchor" href="#cercador" aria-hidden="true"><span class="octicon octicon-link"></span></a>Cercador</h2>
+
+<p>Donada una imatge aquesta aplicació mostrarà per pantalla les imatges que més s'assemblin a aquesta i ordenades per ordre descendent en similitud. Això ho aconseguim a base de calcular la distància entre descriptors de les diferents imatges i fent un ranking de totes les mostres de la nostra base de dades.</p>
+
+<p>(imatges)</p>
+
+<p>Un cop feta l'evaluació d'aquesta part ens dona un resultat general del valor de: 
+Mean Average Precision(MAP): <strong>0.2375</strong></p>
+
+<h2>
+<a id="classificador" class="anchor" href="#classificador" aria-hidden="true"><span class="octicon octicon-link"></span></a>Classificador</h2>
+
+<p>Donada una, o varies, imatges ens les classificarà en les diferents classes d'edificis de Terrassa en funció de la seva semblança a les imatge de la nostra base de dades. Per arribar a assolir-ho entrenarem un classificador amb totes les imatges de les que disposem perquè sigui el més robuste possible a la fase d'entrenament(<a href="https://github.com/gdsa-upc/RdE/blob/master/train_classifier.py">train_classifier</a>). I un cop fet això <a href="https://github.com/gdsa-upc/RdE/blob/master/classify.py">classificarem</a> les imatge en base a aquest classificador</p>
+
+<p>Un cop evaluat aquest apartat ens han donat els següents resultats: </p>
+
+<table>
+<thead>
+<tr>
+<th>Mesura</th>
+<th>Valor</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>F1_Score</td>
+<td>0.4178</td>
+</tr>
+<tr>
+<td>Accuracy</td>
+<td>0.4555</td>
+</tr>
+<tr>
+<td>Precision</td>
+<td>0.4774</td>
+</tr>
+<tr>
+<td>Recall</td>
+<td>0.4555</td>
+</tr>
+</tbody>
+</table>
+
 <p><img src="https://s-media-cache-ak0.pinimg.com/custom_covers/216x146/523473225376877899_1426555013.jpg" alt=""></p>
 
 <h3>
 <a id="qui-som" class="anchor" href="#qui-som" aria-hidden="true"><span class="octicon octicon-link"></span></a>Qui som?</h3>
 
-<p>Aquest projecte l'estem preparant 4 estudiants de 3er d'Enginyeria de Sistemes Audiovisuals de l'Escola d'Enginyeria de Terrassa. Aquests som el Gerard Rosell, l'Ariadna Xicota, el Mateo Montón i l'Abdessadek El Atiki.</p>
+<p>Aquest projecte l'estem preparant 4 estudiants de 3er d'Enginyeria de Sistemes Audiovisuals de l'Escola d'Enginyeria de Terrassa. A l'assignatura de Gestió i Distribució de Senyals Audiovisuals amb els professors Xavier Giró i Amaia Salvador. Nosaltres som el Gerard Rosell, l'Ariadna Xicota, el Mateo Montón i l'Abdessadek El Atiki.</p>
 
-<p><img src="https://www.eet.upc.edu/lescola/img_2545.jpg" alt=""></p>
+<p>Gràcies per visitar el nostre web.
+<img src="https://www.eet.upc.edu/lescola/img_2545.jpg" alt=""></p>
       </section>
       <footer>
         <p>This project is maintained by <a href="https://github.com/gdsa-upc">gdsa-upc</a></p>
