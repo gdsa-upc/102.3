@@ -46,4 +46,4 @@ def evaluate_ranking():
     print 'mean average precision='
     print float(sumap)/float(contr)
     print'\n'
-    return (lista)  
+    return (float(sumap)/float(contr))  
