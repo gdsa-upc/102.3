@@ -51,6 +51,42 @@ def save_ranking_file():
     file_to_save = open(params['arrel_sortida']+'/kaggle_rank'+'.csv','w')
     # Write header
     file_to_save.write("Query,RetrievedDocuments\n")
+    #f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/'+params['val']+'/annotation.txt'),'r') #fem el mateix amb els del test o validació
+    #next(f)
+    #dic_gtv={} #crea un diccionari amb la ground truth de validació o test
+    #for line in f:
+     #   a=line.index('\t')
+      #  dic_gtv[line[0:a]]=line[a+1:]
+    #f.close()
+    ranks = os.listdir(params['arrel_sortida']+'/rankings/')  #llegeixo tots els noms dels fitxers del directori d'entrada i els guarda a ranks
+    for r in ranks:
+        R=r.rstrip('.txt')
+        #if dic_gtv[R]!='desconegut\n':
+        file_to_save.write(R + ',')
+        ranking=[]
+        f=open(params['arrel_sortida']+'/rankings/'+r)
+        ranking=f.read().split()
+        # Convert elements to string and ranking to list
+        ranking = np.array(ranking).astype('str').tolist()    
+        # Write space separated ranking
+        for item in ranking:
+            file_to_save.write(item + " ")
+
+        file_to_save.write('\n')
+    
+    file_to_save.close()
+
+def save_val_ranking_file():
+    params = parametres()
+    '''
+    :param file_to_save: name of the file to be saved
+    :param image_id: name of the query image
+    :param ranking: ranking for the image image_id
+    :return: the updated state of the file to be saved
+    '''
+    file_to_save = open(params['arrel_sortida']+'/kaggle_rank'+'.csv','w')
+    # Write header
+    file_to_save.write("Query,RetrievedDocuments\n")
     f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/'+params['val']+'/annotation.txt'),'r') #fem el mateix amb els del test o validació
     next(f)
     dic_gtv={} #crea un diccionari amb la ground truth de validació o test

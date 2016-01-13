@@ -17,6 +17,14 @@ def train_classifier():
         gtt_dic[line[0:a]]=line[a+1:len(line)-1]
     f.close()
     
+    if params['val']=='test':
+        f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/val/annotation.txt'),'r') #obrim el fitxer ground truth del val i llegim l'interior
+        next(f)
+        for line in f:
+            a=line.index('\t')
+            gtt_dic[line[0:a]]=line[a+1:len(line)-1]
+        f.close()
+    
     #classes = []#inicialitzem el vector classes.
     #for classe in gtt_dic.values(): #l'omplim només amb un valor/classe--després miraré com fer-ho amb el pes.
     #    if classe not in classes:
@@ -60,5 +68,5 @@ def train_classifier():
     
 
     with open(params['arrel_sortida']+'/model_classifier.pickle', 'wb') as save_model:
-        pickle.dump(zones,save_model)
+        pickle.dump(zones.best_estimator_,save_model)
     

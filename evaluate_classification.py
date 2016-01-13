@@ -33,7 +33,7 @@ def plot_confusion_matrix(cm, true_labels,normalize = False,title='Confusion mat
 
 def evaluate_classification():
     params = parametres()
-    f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/'+params['val']+'/annotation.txt'),'r') #obrim el fitxer ground truth de validació i llegim l'interior
+    f=open((params['arrel_entrada']+'/'+params['bd_imatges']+'/'+'test'+'/annotation.txt'),'r') #obrim el fitxer ground truth de validació i llegim l'interior
     next(f)
     gtd={} #crea un diccionari amb la ground truth de validacio
     for line in f:
